@@ -1,0 +1,19 @@
+.home__container {
+  width: 90vw;
+  height: 90vh;
+  border: 2px dotted black;
+  padding: 0px;
+}
+
+h1 {
+  font-size: 8vw;
+  top: 0px;
+  position: absolute;
+  padding: 0px;
+  margin: 0px;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 2px;
+
+  /* text-decoration-color: aqua; */
+}

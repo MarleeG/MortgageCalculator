@@ -1,13 +1,14 @@
-import React from "react";
+import React, {lazy} from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-import Base from "./Base/Base";
+// const Home  = lazy(() => import('./Home/Home')); 
+import Home from './Home/Home';
 
 const App = () => {
   const Routes = (
     <Router>
       <Switch>
-        <Route path="/" component={Base} exact />
+        <Route path="/" component={Home} exact />
 
         <Redirect to="/" exact/>
       </Switch>
