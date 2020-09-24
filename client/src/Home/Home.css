@@ -1,19 +1,47 @@
 .home__container {
   width: 90vw;
   height: 90vh;
-  border: 2px dotted black;
-  padding: 0px;
+
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 5px;
+
+  background: #83a4d4; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b6fbff,
+    #83a4d4
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #b6fbff,
+    #83a4d4
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  -webkit-box-shadow: 10px 10px 29px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 29px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 29px -6px rgba(0, 0, 0, 0.75);
 }
 
 h1 {
   font-size: 8vw;
   top: 0px;
-  position: absolute;
-  padding: 0px;
+  /* position: absolute; */
   margin: 0px;
   text-decoration: underline;
   text-decoration-color: black;
   text-decoration-thickness: 2px;
+}
 
-  /* text-decoration-color: aqua; */
+.container__home-fields {
+  width: 95%;
+  height: 80%;
+  border-radius: 5px;
+  background: white;
+  padding: 10px;
+
+  -webkit-box-shadow: 10px 10px 29px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 29px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 29px -6px rgba(0, 0, 0, 0.75);
 }
