@@ -1,0 +1,13 @@
+.input__container{
+    border: 2px dotted red;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    overflow: hidden;
+    padding: 10px;
+}
+
+label{
+    text-align: left;
+    margin: 10px 0px;
+}

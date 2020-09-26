@@ -6,11 +6,11 @@ import "./Field.css";
 const log = console.log;
 const Field = (props) => {
   // input fields
-  const [homeValue, updateHomeValue] = useState(0);
+  const [homeValue, updateHomeValue] = useState(100000);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    log(`name: ${name} | value: ${value}`);
+    // log(`name: ${name} | value: ${value}`);
 
     switch (name) {
       case "home-value":
