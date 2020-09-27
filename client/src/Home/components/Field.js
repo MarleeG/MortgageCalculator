@@ -12,6 +12,7 @@ const Field = (props) => {
   const [homeownersInsurance, updateHomeownersInsurance] = useState(85);
   const [propertyTax, updatePropertyTax] = useState(110);
   const [hoa, updateHOA] = useState(150);
+  const [loanLength, updateLoanLength] = useState(30);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -45,6 +46,14 @@ const Field = (props) => {
         alert("err");
     }
   };
+
+
+//   for dropdown test
+//   const getVal = (e) => {
+//     e.preventDefault();
+//     let val = document.getElementById('loan-length').value;
+//     updateLoanLength(val);
+//   };
 
   useEffect(() => {}, []);
 
@@ -118,6 +127,22 @@ const Field = (props) => {
 
         {/* drop down options */}
         {/* length of loan */}
+        <Input for="Length of loan" tag="dropdown">
+          <select id="loan-length" name="loan-length">
+            <option value="30">30 Years</option>
+            <option value="20">20 Years</option>
+            <option value="15">15 Years</option>
+            <option value="10">10 Years</option>
+          </select>
+        </Input>
+
+        
+        
+        {/* dropdrop value  */}
+        {/* <button onClick={(e) => getVal(e)} type="submit">
+          {" "}
+          Get dropdown value
+        </button> */}
       </form>
     </div>
   );

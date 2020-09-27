@@ -4,7 +4,6 @@ import "./Input.css";
 
 const log = console.log;
 const Input = (props) => {
-
   const inputStyles = {
     width: "100%",
     height: "2.5vw",
@@ -16,14 +15,19 @@ const Input = (props) => {
     <Fragment>
       <div className="input__container">
         <label>{props.for}</label>
-        <input
-          value={props.value}
-          name={props.name}
-          type={props.type}
-          placeholder={props.placeholder || "placeholder"}
-          onChange={(e) => props.handleChange(e)}
-          style={inputStyles}
-        />
+        {props.tag === "input" ? (
+          <input
+            value={props.value}
+            name={props.name}
+            type={props.type}
+            placeholder={props.placeholder || "placeholder"}
+            onChange={(e) => props.handleChange(e)}
+            style={inputStyles}
+          />
+        ) : (
+          // show dropdown option here
+          props.children
+        )}
       </div>
     </Fragment>
   );
