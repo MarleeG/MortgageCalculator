@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "../../UIElements/Button";
 import Input from "../../UIElements/Input";
 
 import "./Field.css";
@@ -47,19 +48,24 @@ const Field = (props) => {
     }
   };
 
+  //   for dropdown test
+  //   const getVal = (e) => {
+  //     e.preventDefault();
+  //     let val = document.getElementById('loan-length').value;
+  //     updateLoanLength(val);
+  //   };
 
-//   for dropdown test
-//   const getVal = (e) => {
-//     e.preventDefault();
-//     let val = document.getElementById('loan-length').value;
-//     updateLoanLength(val);
-//   };
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    alert('buttn clicked')
+  }
 
   useEffect(() => {}, []);
 
   return (
     <div className="field__container">
-      <form className="field__form">
+      <form className="field__form" onSubmit={handleSubmit}>
         <Input
           value={homeValue}
           name="home-value"
@@ -136,13 +142,15 @@ const Field = (props) => {
           </select>
         </Input>
 
-        
-        
         {/* dropdrop value  */}
         {/* <button onClick={(e) => getVal(e)} type="submit">
           {" "}
           Get dropdown value
         </button> */}
+
+        <div class="field__break"></div>
+        {/* Submit Button Here */}
+        <Button type="submit" text="SUBMIT"  />
       </form>
     </div>
   );
