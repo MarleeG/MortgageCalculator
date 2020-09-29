@@ -13,7 +13,7 @@ const Field = (props) => {
   const [homeownersInsurance, updateHomeownersInsurance] = useState(85);
   const [propertyTax, updatePropertyTax] = useState(110);
   const [hoa, updateHOA] = useState(150);
-  const [loanLength, updateLoanLength] = useState(30);
+  const [loanLength, updateLoanLength] = useState();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -48,17 +48,29 @@ const Field = (props) => {
     }
   };
 
-  //   for dropdown test
-  //   const getVal = (e) => {
-  //     e.preventDefault();
-  //     let val = document.getElementById('loan-length').value;
-  //     updateLoanLength(val);
-  //   };
+    // for dropdown test
+    const getLoanLength = (e) => {
+      // e.preventDefault();
+      let val = document.getElementById('loan-length').value;
+      updateLoanLength(val);
+
+      return val;
+    };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    alert('buttn clicked')
+
+    log('-----------------');
+    log(`homeValue: ${homeValue}`);
+    log(`downPayment: ${downPayment}`);
+    log(`interestRate: ${interestRate}`);
+    log(`homeownersInsurance: ${homeownersInsurance}`);
+    log(`propertyTax: ${propertyTax}`);
+    log(`hoa: ${hoa}`);
+    log(`loanLength: ${getLoanLength()}`);
+    log('-----------------');
+
   }
 
   useEffect(() => {}, []);
