@@ -148,7 +148,7 @@ const Field = (props) => {
           Get dropdown value
         </button> */}
 
-        <div class="field__break"></div>
+        <div className="field__break"></div>
         {/* Submit Button Here */}
         <Button type="submit" text="SUBMIT"  />
       </form>
