@@ -25,6 +25,7 @@ const Input = (props) => {
             type={props.type}
             placeholder={props.placeholder || "placeholder"}
             onChange={(e) => props.handleChange(e)}
+            onKeyDown={(e) => props.onKeyDown(e)}
             style={inputStyles}
             className="input__input unit-input__input"
           />
