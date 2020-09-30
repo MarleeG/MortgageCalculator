@@ -14,54 +14,116 @@ const Field = (props) => {
   const [propertyTax, updatePropertyTax] = useState(110);
   const [hoa, updateHOA] = useState(150);
   const [loanLength, updateLoanLength] = useState();
+  const [currentKey, updateCurrentKey] = useState("");
+  const [currentKeyCode, updateCurrentKeyCode] = useState(null);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    // log(`name: ${name} | value: ${value}`);
 
-    switch (name) {
-      case "home-value":
-        updateHomeValue(value);
-        break;
-      case "down-payment":
-        updateDownPayment(value);
-        break;
+    const isNumber = parseInt(currentKey);
+    const isBackspace = currentKeyCode === 8;
+    const isDot = currentKeyCode === 190;
+    const isDash = currentKeyCode === 173;
 
-      case "interest-rate":
-        updateInterestRate(value);
-        break;
+    // log(`key: ${currentKey}`);
+    if (!isDash) {
+      log("NUMBER");
+      switch (name) {
+        case "home-value":
+          if (
+            isNumber ||
+            isBackspace ||
+            homeValue.toString().split("").indexOf(".") === -1
+          ) {
+            updateHomeValue(value);
+          }
+          break;
+        case "down-payment":
+          if (
+            isNumber ||
+            isBackspace ||
+            downPayment.toString().split("").indexOf(".") === -1
+          ) {
+            updateDownPayment(value);
+          }
+          break;
 
-      case "homeowners-insurance":
-        updateHomeownersInsurance(value);
-        break;
+        case "interest-rate":
+          if (
+            isNumber ||
+            isBackspace ||
+            interestRate.toString().split("").indexOf(".") === -1
+          ) {
+            updateInterestRate(value);
+          }
+          break;
+        case "homeowners-insurance":
+          if (
+            isNumber ||
+            isBackspace ||
+            homeownersInsurance.toString().split("").indexOf(".") === -1
+          ) {
+            updateHomeownersInsurance(value);
+          }
+          break;
 
-      case "property-tax":
-        updatePropertyTax(value);
-        break;
+        case "property-tax":
+          if (
+            isNumber ||
+            isBackspace ||
+            propertyTax.toString().split("").indexOf(".") === -1
+          ) {
+            updatePropertyTax(value);
+          }
 
-      case "homeowners-association":
-        updateHOA(value);
-        break;
+          break;
 
-      default:
-        alert("err");
+        case "homeowners-association":
+          if (
+            isNumber ||
+            isBackspace ||
+            hoa.toString().split("").indexOf(".") === -1
+          ) {
+            updateHOA(value);
+          }
+
+          updateHOA(value);
+          break;
+
+        default:
+          alert("err");
+      }
     }
   };
 
-    // for dropdown test
-    const getLoanLength = (e) => {
-      // e.preventDefault();
-      let val = document.getElementById('loan-length').value;
-      updateLoanLength(val);
+  const keyDown = (e) => {
+    // handleChange(e);
+    // log(e.target);
 
-      return val;
-    };
+    const { key, keyCode } = e;
+    log(`keycode: ${keyCode}`);
 
-  const handleSubmit = e => {
+    updateCurrentKey(key);
+    updateCurrentKeyCode(keyCode);
+
+    // const isNumber = parseInt(e.key);
+
+    // if (isNumber) {
+    //   log("number");
+    // }
+  };
+
+  const getLoanLength = (e) => {
+    let val = document.getElementById("loan-length").value;
+    updateLoanLength(val);
+
+    return val;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-
-    log('-----------------');
+    log("-----------------");
     log(`homeValue: ${homeValue}`);
     log(`downPayment: ${downPayment}`);
     log(`interestRate: ${interestRate}`);
@@ -69,9 +131,8 @@ const Field = (props) => {
     log(`propertyTax: ${propertyTax}`);
     log(`hoa: ${hoa}`);
     log(`loanLength: ${getLoanLength()}`);
-    log('-----------------');
-
-  }
+    log("-----------------");
+  };
 
   useEffect(() => {}, []);
 
@@ -85,6 +146,7 @@ const Field = (props) => {
           for="Home Value"
           tag="input"
           handleChange={handleChange}
+          onKeyDown={keyDown}
         />
 
         {/* amount or % - additional feature */}
@@ -96,6 +158,7 @@ const Field = (props) => {
           for="Down payment"
           placeholder="20000"
           handleChange={handleChange}
+          onKeyDown={keyDown}
         />
 
         {/* interest rate */}
@@ -107,6 +170,7 @@ const Field = (props) => {
           for="Interest rate"
           placeholder="3.05"
           handleChange={handleChange}
+          onKeyDown={keyDown}
         />
 
         {/* Homeowners insurance */}
@@ -118,6 +182,7 @@ const Field = (props) => {
           for="Homeowner's Insurance"
           placeholder="85"
           handleChange={handleChange}
+          onKeyDown={keyDown}
         />
 
         {/* Property Tax */}
@@ -130,6 +195,7 @@ const Field = (props) => {
           for="Property tax"
           placeholder="110"
           handleChange={handleChange}
+          onKeyDown={keyDown}
         />
 
         {/* HOA fees */}
@@ -141,6 +207,7 @@ const Field = (props) => {
           for="HOA"
           placeholder="150"
           handleChange={handleChange}
+          onKeyDown={keyDown}
         />
 
         {/* drop down options */}
@@ -162,7 +229,7 @@ const Field = (props) => {
 
         <div className="field__break"></div>
         {/* Submit Button Here */}
-        <Button type="submit" text="SUBMIT"  />
+        <Button type="submit" text="SUBMIT" />
       </form>
     </div>
   );
