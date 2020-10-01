@@ -25,7 +25,6 @@ const Field = (props) => {
     const isDot = currentKeyCode === 190;
     const isDash = currentKeyCode === 173;
 
-    // log(`key: ${currentKey}`);
     if (!isDash) {
       log("NUMBER");
       switch (name) {
