@@ -120,6 +120,7 @@ const Field = (props) => {
   };
 
   const handleSubmit = (e) => {
+    log("SUBMITTED");
     e.preventDefault();
 
     log("-----------------");
@@ -131,6 +132,51 @@ const Field = (props) => {
     log(`hoa: ${hoa}`);
     log(`loanLength: ${getLoanLength()}`);
     log("-----------------");
+
+    const principalLoanAmount = parseFloat(homeValue) - parseFloat(downPayment);
+    const monthDurationOfLoan = parseFloat(getLoanLength()) * 12;
+
+    const rate = parseFloat(interestRate) / 100;
+
+    log("Month loan duration: ", monthDurationOfLoan);
+
+    log("principal loan amount: ", principalLoanAmount);
+    log("rate: ", rate);
+
+    // formula
+    // M = P[r(1+r)^n/((1+r)^n)-1)]
+
+    // numerator
+    // r(1+r)^n
+    // const numerator = parseFloat(
+    //   Math.pow(
+    //     parseFloat(rate / 12) * (1 + parseFloat(rate / 12)),
+    //     monthDurationOfLoan
+    //   )
+    // );
+
+    const numerator = (rate/12)*Math.pow((1+ (rate/12)), monthDurationOfLoan);
+
+    log('numerator: ', numerator);
+
+    // denomintor
+    // ((1+r)^n)-1)
+    let denomintor = parseFloat(
+      Math.pow((1 + rate / 12), monthDurationOfLoan)
+    );
+
+    denomintor = parseFloat(denomintor - 1);
+    log('denominator: ', denomintor);
+
+    const fraction = parseFloat(numerator) / parseFloat(denomintor);
+
+    const principalAndInterest = principalLoanAmount * parseFloat(fraction);
+
+    log(principalAndInterest);
+    
+    const monthlyPayment = principalAndInterest + hoa + propertyTax + homeownersInsurance;
+
+    log(monthlyPayment);
   };
 
   useEffect(() => {}, []);
