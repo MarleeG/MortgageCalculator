@@ -18,7 +18,7 @@ const Input = (props) => {
         {/* <span>$</span> */}
         {props.tag === "input" ? (
           <span className="unit-input">
-            <span className="unit-input__prepend">$</span>
+            <span className="unit-input__prepend">{props.sign}</span>
              <input
             value={props.value}
             name={props.name}
