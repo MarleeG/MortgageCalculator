@@ -240,6 +240,7 @@ const Field = (props) => {
           tag="input"
           handleChange={handleChange}
           onKeyDown={keyDown}
+          sign='$'
         />
 
         {/* amount or % - additional feature */}
@@ -252,6 +253,7 @@ const Field = (props) => {
           placeholder="20000"
           handleChange={handleChange}
           onKeyDown={keyDown}
+          sign='$'
         />
 
         {/* interest rate */}
@@ -264,6 +266,7 @@ const Field = (props) => {
           placeholder="3.05"
           handleChange={handleChange}
           onKeyDown={keyDown}
+          sign='%'
         />
 
         {/* Homeowners insurance */}
@@ -276,6 +279,7 @@ const Field = (props) => {
           placeholder="85"
           handleChange={handleChange}
           onKeyDown={keyDown}
+          sign='$'
         />
 
         {/* Property Tax */}
@@ -289,6 +293,7 @@ const Field = (props) => {
           placeholder="110"
           handleChange={handleChange}
           onKeyDown={keyDown}
+          sign='$'
         />
 
         {/* HOA fees */}
@@ -301,6 +306,7 @@ const Field = (props) => {
           placeholder="150"
           handleChange={handleChange}
           onKeyDown={keyDown}
+          sign='$'
         />
 
         {/* drop down options */}
