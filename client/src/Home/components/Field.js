@@ -13,7 +13,7 @@ const Field = (props) => {
   const [homeownersInsurance, updateHomeownersInsurance] = useState(85);
   const [propertyTax, updatePropertyTax] = useState(110);
   const [hoa, updateHOA] = useState(150);
-  const [loanLength, updateLoanLength] = useState();
+  const [loanLength, updateLoanLength] = useState(undefined);
   const [currentKey, updateCurrentKey] = useState("");
   const [currentKeyCode, updateCurrentKeyCode] = useState(null);
 
@@ -96,20 +96,11 @@ const Field = (props) => {
   };
 
   const keyDown = (e) => {
-    // handleChange(e);
-    // log(e.target);
-
     const { key, keyCode } = e;
     log(`keycode: ${keyCode}`);
 
     updateCurrentKey(key);
     updateCurrentKeyCode(keyCode);
-
-    // const isNumber = parseInt(e.key);
-
-    // if (isNumber) {
-    //   log("number");
-    // }
   };
 
   const getLoanLength = (e) => {
@@ -119,6 +110,58 @@ const Field = (props) => {
     return val;
   };
 
+  const checkAllInputValues = () => {
+    const inputValues = [
+      { name: "homeValue", val: homeValue },
+      { name: "downPayment", val: downPayment },
+      { name: "interestRate", val: interestRate },
+      { name: "homeownersInsurance", val: homeownersInsurance },
+      { name: "propertyTax", val: propertyTax },
+      { name: "hoa", val: hoa },
+    ];
+
+    // check if values are empty
+    inputValues.map((valInfo) => {
+      const emptyValue = valInfo.val === "";
+      log(`emptyValue: ${emptyValue}`);
+
+      if (emptyValue) {
+        switch (valInfo.name) {
+          case "homeValue":
+            updateHomeValue(0);
+            alert("updating homeValue to 0");
+            break;
+          case "downPayment":
+            updateDownPayment(0);
+            break;
+
+          case "interestRate":
+            updateInterestRate(0);
+            break;
+
+          case "homeownersInsurance":
+            updateHomeownersInsurance(0);
+            break;
+
+          case "propertyTax":
+            updatePropertyTax(0);
+            break;
+
+          case "hoa":
+            updateHOA(0);
+            break;
+
+          default:
+            updateHomeValue(0);
+            updateDownPayment(0);
+            updateInterestRate(0);
+            updateHomeownersInsurance(0);
+            updatePropertyTax(0);
+            updateHOA(0);
+        }
+      }
+    });
+  };
   const handleSubmit = (e) => {
     log("SUBMITTED");
     e.preventDefault();
@@ -132,6 +175,8 @@ const Field = (props) => {
     log(`hoa: ${hoa}`);
     log(`loanLength: ${getLoanLength()}`);
     log("-----------------");
+
+    checkAllInputValues();
 
     const principalLoanAmount = parseFloat(homeValue) - parseFloat(downPayment);
     const monthDurationOfLoan = parseFloat(getLoanLength()) * 12;
@@ -155,28 +200,28 @@ const Field = (props) => {
     //   )
     // );
 
-    const numerator = (rate/12)*Math.pow((1+ (rate/12)), monthDurationOfLoan);
+    const numerator =
+      (rate / 12) * Math.pow(1 + rate / 12, monthDurationOfLoan);
 
-    log('numerator: ', numerator);
+    log("numerator: ", numerator);
 
     // denomintor
     // ((1+r)^n)-1)
-    let denomintor = parseFloat(
-      Math.pow((1 + rate / 12), monthDurationOfLoan)
-    );
+    let denomintor = parseFloat(Math.pow(1 + rate / 12, monthDurationOfLoan));
 
     denomintor = parseFloat(denomintor - 1);
-    log('denominator: ', denomintor);
+    log("denominator: ", denomintor);
 
     const fraction = parseFloat(numerator) / parseFloat(denomintor);
 
     const principalAndInterest = principalLoanAmount * parseFloat(fraction);
 
     log(principalAndInterest);
-    
-    const monthlyPayment = principalAndInterest + hoa + propertyTax + homeownersInsurance;
 
-    log(monthlyPayment);
+    const monthlyPayment =
+      principalAndInterest + hoa + propertyTax + homeownersInsurance;
+
+    log("monthly payment: ", monthlyPayment);
   };
 
   useEffect(() => {}, []);
@@ -265,12 +310,6 @@ const Field = (props) => {
             <option value="10">10 Years</option>
           </select>
         </Input>
-
-        {/* dropdrop value  */}
-        {/* <button onClick={(e) => getVal(e)} type="submit">
-          {" "}
-          Get dropdown value
-        </button> */}
 
         <div className="field__break"></div>
         {/* Submit Button Here */}
