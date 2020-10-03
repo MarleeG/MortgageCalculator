@@ -20,76 +20,79 @@ const Field = (props) => {
   const handleChange = (e) => {
     const { value, name } = e.target;
 
-    const isNumber = parseInt(currentKey);
+    // 48-57 are number keycodes
+    // const isNumber = parseInt(currentKey);
+
+    const isNumber =
+      currentKeyCode === 48 ||
+      currentKeyCode === 49 ||
+      currentKeyCode === 50 ||
+      currentKeyCode === 51 ||
+      currentKeyCode === 52 ||
+      currentKeyCode === 53 ||
+      currentKeyCode === 54 ||
+      currentKeyCode === 55 ||
+      currentKeyCode === 56 ||
+      currentKeyCode === 57;
+
     const isBackspace = currentKeyCode === 8;
-    const isDot = currentKeyCode === 190;
     const isDash = currentKeyCode === 173;
+    const isDot = currentKeyCode === 190;
 
     if (!isDash) {
       log("NUMBER");
       switch (name) {
         case "home-value":
-          if (
-            isNumber ||
-            isBackspace ||
-            homeValue.toString().split("").indexOf(".") === -1
-          ) {
+          if (isDot && homeValue.toString().split("").indexOf(".") === -1) {
+            updateHomeValue(value);
+          } else if (isNumber || isBackspace) {
             updateHomeValue(value);
           }
+
           break;
         case "down-payment":
-          if (
-            isNumber ||
-            isBackspace ||
-            downPayment.toString().split("").indexOf(".") === -1
-          ) {
+          if (isDot && downPayment.toString().split("").indexOf(".") === -1) {
+            updateDownPayment(value);
+          } else if (isNumber || isBackspace) {
             updateDownPayment(value);
           }
           break;
-
         case "interest-rate":
-          if (
-            isNumber ||
-            isBackspace ||
-            interestRate.toString().split("").indexOf(".") === -1
-          ) {
+          if (isDot && interestRate.toString().split("").indexOf(".") === -1) {
+            updateInterestRate(value);
+          } else if (isNumber || isBackspace) {
             updateInterestRate(value);
           }
           break;
         case "homeowners-insurance":
           if (
-            isNumber ||
-            isBackspace ||
+            isDot &&
             homeownersInsurance.toString().split("").indexOf(".") === -1
           ) {
             updateHomeownersInsurance(value);
+          } else if (isNumber || isBackspace) {
+            updateHomeownersInsurance(value);
           }
+
           break;
 
         case "property-tax":
-          if (
-            isNumber ||
-            isBackspace ||
-            propertyTax.toString().split("").indexOf(".") === -1
-          ) {
+          if (isDot && propertyTax.toString().split("").indexOf(".") === -1) {
+            updatePropertyTax(value);
+          } else if (isNumber || isBackspace) {
             updatePropertyTax(value);
           }
-
           break;
-
         case "homeowners-association":
-          if (
-            isNumber ||
-            isBackspace ||
-            hoa.toString().split("").indexOf(".") === -1
-          ) {
+          if (isDot && hoa.toString().split("").indexOf(".") === -1) {
+            updateHOA(value);
+          } else if (isNumber || isBackspace) {
             updateHOA(value);
           }
-
-          updateHOA(value);
           break;
 
         default:
+          // adjust this later
           alert("err");
       }
     }
@@ -122,14 +125,14 @@ const Field = (props) => {
 
     // check if values are empty
     inputValues.map((valInfo) => {
-      const emptyValue = valInfo.val === "";
+      const {name, val} = valInfo;
+      const emptyValue = val === "" || val === '.';
       log(`emptyValue: ${emptyValue}`);
 
       if (emptyValue) {
-        switch (valInfo.name) {
+        switch (name) {
           case "homeValue":
             updateHomeValue(0);
-            alert("updating homeValue to 0");
             break;
           case "downPayment":
             updateDownPayment(0);
