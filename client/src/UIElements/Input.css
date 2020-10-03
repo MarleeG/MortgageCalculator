@@ -22,16 +22,13 @@ input.input__input {
 /* unit */
 .unit-input {
   border: #dfdfdf solid 1px;
-  /* display: inline-flex; */
   display: table;
   overflow: hidden;
 }
 
 .unit-input__prepend {
   color: #a3a0a0;
-  /* background: #f4f4f4; */
   padding: 0.5em;
-  border: #dfdfdf solid 0;
   flex-grow: 0;
   display: table-cell;
   vertical-align: middle;
@@ -46,4 +43,9 @@ input.input__input {
 .unit-input__input:focus {
   background: #f4f4f4;
   outline: none;
+}
+
+#loan-length {
+  border: #dfdfdf solid 1px;
+  height: 2.5vw;
 }
