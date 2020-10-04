@@ -123,10 +123,12 @@ const Field = (props) => {
       { name: "hoa", val: hoa },
     ];
 
+   
+
     // check if values are empty
     inputValues.map((valInfo) => {
-      const {name, val} = valInfo;
-      const emptyValue = val === "" || val === '.';
+      const { name, val } = valInfo;
+      const emptyValue = val === "" || val === ".";
       log(`emptyValue: ${emptyValue}`);
 
       if (emptyValue) {
@@ -163,7 +165,19 @@ const Field = (props) => {
             updateHOA(0);
         }
       }
+
     });
+
+
+    const homeValueInputted = inputValues[0].val;
+    const downPaymentValueInputted = inputValues[1].val;
+
+    if (homeValueInputted < downPaymentValueInputted) {
+      alert("Enter a lower down payment- Add Modal");
+      log('DOWN PAYMENT IS LARGER THAN HOME VALUE');
+    }
+
+
   };
   const handleSubmit = (e) => {
     log("SUBMITTED");
@@ -240,7 +254,7 @@ const Field = (props) => {
           tag="input"
           handleChange={handleChange}
           onKeyDown={keyDown}
-          sign='$'
+          sign="$"
         />
 
         {/* amount or % - additional feature */}
@@ -253,7 +267,7 @@ const Field = (props) => {
           placeholder="20000"
           handleChange={handleChange}
           onKeyDown={keyDown}
-          sign='$'
+          sign="$"
         />
 
         {/* interest rate */}
@@ -266,7 +280,7 @@ const Field = (props) => {
           placeholder="3.05"
           handleChange={handleChange}
           onKeyDown={keyDown}
-          sign='%'
+          sign="%"
         />
 
         {/* Homeowners insurance */}
@@ -279,7 +293,7 @@ const Field = (props) => {
           placeholder="85"
           handleChange={handleChange}
           onKeyDown={keyDown}
-          sign='$'
+          sign="$"
         />
 
         {/* Property Tax */}
@@ -293,7 +307,7 @@ const Field = (props) => {
           placeholder="110"
           handleChange={handleChange}
           onKeyDown={keyDown}
-          sign='$'
+          sign="$"
         />
 
         {/* HOA fees */}
@@ -306,7 +320,7 @@ const Field = (props) => {
           placeholder="150"
           handleChange={handleChange}
           onKeyDown={keyDown}
-          sign='$'
+          sign="$"
         />
 
         {/* drop down options */}
