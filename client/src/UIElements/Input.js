@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 import "./Input.css";
 
-const log = console.log;
+// const log = console.log;
 const Input = (props) => {
   const inputStyles = {
     width: "100%",
