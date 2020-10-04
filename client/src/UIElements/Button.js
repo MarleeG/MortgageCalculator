@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import "./Button.css";
-const log = console.log;
 const Button = (props) => {
   const [buttonClasses, updateButtonClasses] = useState(
     "button box-shadow animate__animated"

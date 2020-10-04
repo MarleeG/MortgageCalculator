@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Button from "../../UIElements/Button";
 import Input from "../../UIElements/Input";
 
-import "./Field.css";
+import "./Fields.css";
 
 const log = console.log;
-const Field = (props) => {
+const Fields = (props) => {
   // input fields
   const [homeValue, updateHomeValue] = useState(100000);
   const [downPayment, updateDownPayment] = useState(20000);
@@ -17,6 +17,7 @@ const Field = (props) => {
   const [currentKey, updateCurrentKey] = useState("");
   const [currentKeyCode, updateCurrentKeyCode] = useState(null);
 
+  const [showModalStatus, showModalStatusHandler] = useState(false);
   const handleChange = (e) => {
     const { value, name } = e.target;
 
@@ -40,7 +41,7 @@ const Field = (props) => {
     const isDot = currentKeyCode === 190;
 
     if (!isDash) {
-      log("NUMBER");
+      // log("NUMBER");
       switch (name) {
         case "home-value":
           if (isDot && homeValue.toString().split("").indexOf(".") === -1) {
@@ -100,7 +101,7 @@ const Field = (props) => {
 
   const keyDown = (e) => {
     const { key, keyCode } = e;
-    log(`keycode: ${keyCode}`);
+    // log(`keycode: ${keyCode}`);
 
     updateCurrentKey(key);
     updateCurrentKeyCode(keyCode);
@@ -123,13 +124,11 @@ const Field = (props) => {
       { name: "hoa", val: hoa },
     ];
 
-   
-
     // check if values are empty
     inputValues.map((valInfo) => {
       const { name, val } = valInfo;
       const emptyValue = val === "" || val === ".";
-      log(`emptyValue: ${emptyValue}`);
+      // log(`emptyValue: ${emptyValue}`);
 
       if (emptyValue) {
         switch (name) {
@@ -165,33 +164,35 @@ const Field = (props) => {
             updateHOA(0);
         }
       }
-
     });
-
 
     const homeValueInputted = inputValues[0].val;
     const downPaymentValueInputted = inputValues[1].val;
 
     if (homeValueInputted < downPaymentValueInputted) {
-      alert("Enter a lower down payment- Add Modal");
-      log('DOWN PAYMENT IS LARGER THAN HOME VALUE');
+      // alert("Enter a lower down payment- Add Modal");
+      
+      log("DOWN PAYMENT IS LARGER THAN HOME VALUE");
+      showModalStatusHandler(true);
+      props.toggleModal(showModalStatus);
     }
 
 
   };
+
   const handleSubmit = (e) => {
     log("SUBMITTED");
     e.preventDefault();
 
-    log("-----------------");
-    log(`homeValue: ${homeValue}`);
-    log(`downPayment: ${downPayment}`);
-    log(`interestRate: ${interestRate}`);
-    log(`homeownersInsurance: ${homeownersInsurance}`);
-    log(`propertyTax: ${propertyTax}`);
-    log(`hoa: ${hoa}`);
-    log(`loanLength: ${getLoanLength()}`);
-    log("-----------------");
+    // log("-----------------");
+    // log(`homeValue: ${homeValue}`);
+    // log(`downPayment: ${downPayment}`);
+    // log(`interestRate: ${interestRate}`);
+    // log(`homeownersInsurance: ${homeownersInsurance}`);
+    // log(`propertyTax: ${propertyTax}`);
+    // log(`hoa: ${hoa}`);
+    // log(`loanLength: ${getLoanLength()}`);
+    // log("-----------------");
 
     checkAllInputValues();
 
@@ -200,48 +201,41 @@ const Field = (props) => {
 
     const rate = parseFloat(interestRate) / 100;
 
-    log("Month loan duration: ", monthDurationOfLoan);
+    // log("Month loan duration: ", monthDurationOfLoan);
 
-    log("principal loan amount: ", principalLoanAmount);
-    log("rate: ", rate);
+    // log("principal loan amount: ", principalLoanAmount);
+    // log("rate: ", rate);
 
     // formula
     // M = P[r(1+r)^n/((1+r)^n)-1)]
 
     // numerator
     // r(1+r)^n
-    // const numerator = parseFloat(
-    //   Math.pow(
-    //     parseFloat(rate / 12) * (1 + parseFloat(rate / 12)),
-    //     monthDurationOfLoan
-    //   )
-    // );
-
     const numerator =
       (rate / 12) * Math.pow(1 + rate / 12, monthDurationOfLoan);
 
-    log("numerator: ", numerator);
+    // log("numerator: ", numerator);
 
     // denomintor
     // ((1+r)^n)-1)
     let denomintor = parseFloat(Math.pow(1 + rate / 12, monthDurationOfLoan));
 
     denomintor = parseFloat(denomintor - 1);
-    log("denominator: ", denomintor);
+    // log("denominator: ", denomintor);
 
     const fraction = parseFloat(numerator) / parseFloat(denomintor);
 
     const principalAndInterest = principalLoanAmount * parseFloat(fraction);
 
-    log(principalAndInterest);
+    // log(principalAndInterest);
 
     const monthlyPayment =
       principalAndInterest + hoa + propertyTax + homeownersInsurance;
 
-    log("monthly payment: ", monthlyPayment);
+    // log("monthly payment: ", monthlyPayment);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {}, [showModalStatus]);
 
   return (
     <div className="field__container">
@@ -342,4 +336,4 @@ const Field = (props) => {
   );
 };
 
-export default Field;
+export default Fields;

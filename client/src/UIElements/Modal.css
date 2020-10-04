@@ -1,0 +1,8 @@
+.modal__container{
+    width: 15vw;
+    height: 15vw;
+
+    border: 2px dotted blue;
+    background: black;
+    z-index: 20;
+}

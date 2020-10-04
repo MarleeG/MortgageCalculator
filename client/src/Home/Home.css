@@ -1,4 +1,4 @@
-.home__container {
+.home__main {
   width: 90vw;
   height: 90vh;
 
@@ -27,7 +27,6 @@
 h1 {
   font-size: 8vw;
   top: 0px;
-  /* position: absolute; */
   margin: 0px;
   text-decoration: underline;
   text-decoration-color: black;
