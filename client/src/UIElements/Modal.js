@@ -7,10 +7,16 @@ import "./Modal.css";
 
 const log = console.log;
 const ModalOverlay = (props) => {
-  const {classes} = props;
-  useEffect(() => {}, [props.show]);
+  const { classes, modalInfo: {title} } = props;
+  useEffect(() => {}, [props.show, title]);
 
-  const content = <div className={`modal__container ${classes}`}>I am the Modal</div>;
+  const content = (
+    <div className={`modal__container ${classes}`}>
+      <h1>{title}</h1>
+      
+      I am the Modal
+    </div>
+  );
 
   return ReactDOM.createPortal(content, document.getElementById("modal-hook"));
 };

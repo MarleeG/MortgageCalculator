@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../UIElements/Modal";
 import Fields from "./components/Fields";
 
@@ -6,11 +6,21 @@ import "./Home.css";
 const log = console.log;
 const Base = () => {
   const [showModal, showModalHandler] = useState(false);
+  const [modalData, modalDataHandler] = useState({});
 
-  const toggleModal = (bool) => {
+  const toggleModal = (bool, data) => {
     log(`bool: ${bool}`);
-    bool ? showModalHandler(false) : showModalHandler(true);
+    log(data);
+
+    if (bool) {
+      showModalHandler(false);
+      modalDataHandler(data);
+    } else {
+      showModalHandler(true);
+    }
   };
+
+  useEffect(() => {}, [modalData]);
 
   return (
     <div className="home__container">
@@ -23,7 +33,7 @@ const Base = () => {
         </div>
       </div>
 
-      <Modal show={showModal} classes='center'/>
+      <Modal show={showModal} modalInfo={modalData} classes="center" />
     </div>
   );
 };
