@@ -18,6 +18,7 @@ const Fields = (props) => {
   const [currentKeyCode, updateCurrentKeyCode] = useState(null);
 
   const [showModalStatus, showModalStatusHandler] = useState(false);
+  const [modalData, modalDataHandler] = useState({});
   const handleChange = (e) => {
     const { value, name } = e.target;
 
@@ -171,13 +172,12 @@ const Fields = (props) => {
 
     if (homeValueInputted < downPaymentValueInputted) {
       // alert("Enter a lower down payment- Add Modal");
-      
+
       log("DOWN PAYMENT IS LARGER THAN HOME VALUE");
       showModalStatusHandler(true);
-      props.toggleModal(showModalStatus);
+      modalDataHandler({ ...modalData, title: "Error" });
+      props.toggleModal(showModalStatus, modalData);
     }
-
-
   };
 
   const handleSubmit = (e) => {
@@ -235,7 +235,9 @@ const Fields = (props) => {
     // log("monthly payment: ", monthlyPayment);
   };
 
-  useEffect(() => {}, [showModalStatus]);
+  useEffect(() => {
+    log("Modal Data:: ", modalData);
+  }, [modalData,showModalStatus]);
 
   return (
     <div className="field__container">

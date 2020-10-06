@@ -1,8 +1,9 @@
 .modal__container{
-    width: 15vw;
+    width: 35vw;
     height: 15vw;
 
     border: 2px dotted blue;
-    background: black;
+
+    background: #EEF2F5;
     z-index: 20;
 }
