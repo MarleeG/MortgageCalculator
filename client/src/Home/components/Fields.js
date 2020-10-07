@@ -102,7 +102,6 @@ const Fields = (props) => {
 
   const keyDown = (e) => {
     const { key, keyCode } = e;
-    // log(`keycode: ${keyCode}`);
 
     updateCurrentKey(key);
     updateCurrentKeyCode(keyCode);
