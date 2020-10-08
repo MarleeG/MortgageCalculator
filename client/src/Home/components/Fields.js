@@ -174,8 +174,11 @@ const Fields = (props) => {
 
       log("DOWN PAYMENT IS LARGER THAN HOME VALUE");
       showModalStatusHandler(true);
-      modalDataHandler({ ...modalData, title: "Error" });
-      props.toggleModal(showModalStatus, modalData);
+      modalDataHandler({ ...modalData, title: "Quick Reminder" });
+      // props.toggleModal(showModalStatus, modalData);
+
+      // props.toggleModal(true, {title: 'hello'});
+
     }
   };
 
@@ -235,8 +238,25 @@ const Fields = (props) => {
   };
 
   useEffect(() => {
-    log("Modal Data:: ", modalData);
-  }, [modalData,showModalStatus]);
+    // log("Modal Data:: ", modalData);
+
+    log(`modalData.title:: ${modalData.title}`);
+
+
+    if(showModalStatus && modalData.title){
+      props.toggleModal(showModalStatus, modalData);
+    }
+
+    // if(showModalStatus){
+    //   props.toggleModal(true)
+    // }
+
+    // if(modalData.title){
+    //   props.toggleModal(true, modalData);
+
+    // }
+    
+  }, [modalData, showModalStatus]);
 
   return (
     <div className="field__container">

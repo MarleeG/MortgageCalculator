@@ -24,7 +24,7 @@
   box-shadow: 10px 10px 29px -6px rgba(0, 0, 0, 0.75);
 }
 
-h1 {
+h1.home__header {
   font-size: 8vw;
   top: 0px;
   margin: 0px;

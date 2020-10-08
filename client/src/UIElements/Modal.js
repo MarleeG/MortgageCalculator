@@ -7,14 +7,16 @@ import "./Modal.css";
 
 const log = console.log;
 const ModalOverlay = (props) => {
-  const { classes, modalInfo: {title} } = props;
+  const {
+    classes,
+    modalInfo: { title },
+  } = props;
   useEffect(() => {}, [props.show, title]);
 
   const content = (
     <div className={`modal__container ${classes}`}>
-      <h1>{title}</h1>
-      
-      I am the Modal
+      {/* <h1>{}</h1> */}
+      {title && <h1>{title}</h1>}I am the Modal
     </div>
   );
 

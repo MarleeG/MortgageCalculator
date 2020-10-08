@@ -13,7 +13,7 @@ const Base = () => {
     log(data);
 
     if (bool) {
-      showModalHandler(false);
+      showModalHandler(bool);
       modalDataHandler(data);
     } else {
       showModalHandler(true);
@@ -25,7 +25,7 @@ const Base = () => {
   return (
     <div className="home__container">
       <div className="home__main center">
-        <h1>Mortgage Calculator</h1>
+        <h1 className="home__header">Mortgage Calculator</h1>
         <div className="container__home-fields">
           {/* {showModal && } */}
 
