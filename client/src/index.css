@@ -49,3 +49,9 @@ body {
   opacity: 0;
   transition: all 200ms;
 }
+
+
+.field__break {
+  flex-basis: 100%;
+  height: 0;
+}
