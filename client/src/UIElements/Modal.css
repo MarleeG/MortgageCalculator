@@ -1,9 +1,36 @@
 .modal__container{
     width: 35vw;
-    height: 15vw;
-
-    border: 2px dotted blue;
-
+    height: 20vw;
     background: #EEF2F5;
     z-index: 20;
+    padding:20px;
+    border: 1px solid  #e8ebec;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.modal__header{
+    margin: 10px;
+}
+
+span.modal_exit-x{
+    position: absolute;
+    top:0;
+    right: 0;
+
+    /* margin: 15px; */
+    padding: 10px;
+
+    font-weight: 400;
+
+    color: #b1b0be;
+
+    /* border: 1px solid black; */
+}
+
+span.modal_exit-x:hover{
+    color:  #d63920;
+
 }

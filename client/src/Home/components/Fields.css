@@ -10,8 +10,3 @@ form.field__form {
   flex-wrap: wrap;
   margin: 5px;
 }
-
-.field__break {
-  flex-basis: 100%;
-  height: 0;
-}

@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
+import Button from "./Button";
 // import Backdrop from "./Backdrop";
 
 import "./Modal.css";
@@ -9,14 +10,20 @@ const log = console.log;
 const ModalOverlay = (props) => {
   const {
     classes,
-    modalInfo: { title },
+    modalInfo: { title, msg },
   } = props;
   useEffect(() => {}, [props.show, title]);
 
   const content = (
     <div className={`modal__container ${classes}`}>
-      {/* <h1>{}</h1> */}
-      {title && <h1>{title}</h1>}I am the Modal
+      <span className="modal_exit-x">X</span>
+      {title && <h1 className="modal__header">{title}</h1>}
+
+      {msg && <p>{msg}</p>}
+
+      <Button text="CLOSE" type="text" />
+
+      {/* I am the Modal */}
     </div>
   );
 

@@ -174,7 +174,7 @@ const Fields = (props) => {
 
       log("DOWN PAYMENT IS LARGER THAN HOME VALUE");
       showModalStatusHandler(true);
-      modalDataHandler({ ...modalData, title: "Quick Reminder" });
+      modalDataHandler({ ...modalData, title: "Quick Reminder", msg: "You're home value must be greater than your down payment." });
       // props.toggleModal(showModalStatus, modalData);
 
       // props.toggleModal(true, {title: 'hello'});
