@@ -22,20 +22,9 @@ const Fields = (props) => {
   const handleChange = (e) => {
     const { value, name } = e.target;
 
-    // 48-57 are number keycodes
-    // const isNumber = parseInt(currentKey);
-
-    const isNumber =
-      currentKeyCode === 48 ||
-      currentKeyCode === 49 ||
-      currentKeyCode === 50 ||
-      currentKeyCode === 51 ||
-      currentKeyCode === 52 ||
-      currentKeyCode === 53 ||
-      currentKeyCode === 54 ||
-      currentKeyCode === 55 ||
-      currentKeyCode === 56 ||
-      currentKeyCode === 57;
+    const isNumber = Number.isInteger(
+      parseInt(String.fromCharCode(currentKeyCode))
+    );
 
     const isBackspace = currentKeyCode === 8;
     const isDash = currentKeyCode === 173;
@@ -170,15 +159,24 @@ const Fields = (props) => {
     const downPaymentValueInputted = inputValues[1].val;
 
     if (homeValueInputted < downPaymentValueInputted) {
-      // alert("Enter a lower down payment- Add Modal");
 
       log("DOWN PAYMENT IS LARGER THAN HOME VALUE");
       showModalStatusHandler(true);
-      modalDataHandler({ ...modalData, title: "Quick Reminder", msg: "You're home value must be greater than your down payment." });
+      modalDataHandler({
+        ...modalData,
+        title: "Quick Reminder!",
+        msg: "You're home value must be greater than or equal to your down payment.",
+      });
       // props.toggleModal(showModalStatus, modalData);
 
       // props.toggleModal(true, {title: 'hello'});
-
+    }else{
+      showModalStatusHandler(true);
+      modalDataHandler({
+        ...modalData,
+        title: "Quick Reminder",
+        msg: "You're home value must be greater than your down payment.",
+      });
     }
   };
 
@@ -202,11 +200,6 @@ const Fields = (props) => {
     const monthDurationOfLoan = parseFloat(getLoanLength()) * 12;
 
     const rate = parseFloat(interestRate) / 100;
-
-    // log("Month loan duration: ", monthDurationOfLoan);
-
-    // log("principal loan amount: ", principalLoanAmount);
-    // log("rate: ", rate);
 
     // formula
     // M = P[r(1+r)^n/((1+r)^n)-1)]
@@ -234,6 +227,9 @@ const Fields = (props) => {
     const monthlyPayment =
       principalAndInterest + hoa + propertyTax + homeownersInsurance;
 
+
+
+      // props.toggleModal(true, {modalInfo: {title: 'Estimated Mortgage', msg: 'Message here'}});
     // log("monthly payment: ", monthlyPayment);
   };
 
@@ -242,8 +238,7 @@ const Fields = (props) => {
 
     log(`modalData.title:: ${modalData.title}`);
 
-
-    if(showModalStatus && modalData.title){
+    if (showModalStatus && modalData.title) {
       props.toggleModal(showModalStatus, modalData);
     }
 
@@ -255,7 +250,6 @@ const Fields = (props) => {
     //   props.toggleModal(true, modalData);
 
     // }
-    
   }, [modalData, showModalStatus]);
 
   return (
