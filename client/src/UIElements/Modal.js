@@ -4,27 +4,38 @@ import { CSSTransition } from "react-transition-group";
 import Button from "./Button";
 // import Backdrop from "./Backdrop";
 
-
 import "./Modal.css";
 
 const log = console.log;
 const ModalOverlay = (props) => {
+  // log('Props');
+  // log(props);
   const {
     classes,
     modalInfo: { title, msg },
   } = props;
+
   useEffect(() => {}, [props.show, title]);
 
   const content = (
     <div className={`modal__container ${classes}`}>
-      <span className="modal_exit-x">X</span>
-      {title && <h1 className="modal__header">{title}</h1>}
+      <span
+        className="modal_exit-x"
+        onClick={() => props.toggleModal(false, {})}
+      >
+        X
+      </span>
+      {title && <h1 className="modal__header font-lobster">{title}</h1>}
 
       {msg && <p>{msg}</p>}
 
-      <Button text="CLOSE" type="text" />
-
-      {/* I am the Modal */}
+      <Button
+        text="CLOSE"
+        type="text"
+        handleCloseModal={props.toggleModal}
+        animate={false}
+        classes="modal__btn"
+      />
     </div>
   );
 
@@ -32,7 +43,6 @@ const ModalOverlay = (props) => {
 };
 
 const Modal = (props) => {
-  log(props);
   return (
     <Fragment>
       {props.show && (

@@ -1,10 +1,15 @@
-button{
-    width: 50%;
-    margin: 40px auto;
-    background-color:  #313152;
-    border: none;
-    font-size: 2vw;
-    color: white;
-    padding: 20px;
-    border-radius: 4px;
+button {
+  width: 50%;
+  margin: 40px auto;
+  background-color: #313152;
+  border: none;
+  font-size: 2vw;
+  color: white;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.modal__btn:active {
+  background-color: 
+  #222239 ;
 }
