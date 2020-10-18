@@ -13,12 +13,14 @@ const Fields = (props) => {
   const [homeownersInsurance, updateHomeownersInsurance] = useState(85);
   const [propertyTax, updatePropertyTax] = useState(110);
   const [hoa, updateHOA] = useState(150);
-  const [loanLength, updateLoanLength] = useState(undefined);
+  const [loanLength, updateLoanLength] = useState(30);
+
   const [currentKey, updateCurrentKey] = useState("");
   const [currentKeyCode, updateCurrentKeyCode] = useState(null);
 
   const [showModalStatus, showModalStatusHandler] = useState(false);
   const [modalData, modalDataHandler] = useState({});
+
   const handleChange = (e) => {
     const { value, name } = e.target;
 
@@ -161,23 +163,20 @@ const Fields = (props) => {
     if (homeValueInputted < downPaymentValueInputted) {
 
       log("DOWN PAYMENT IS LARGER THAN HOME VALUE");
+
       showModalStatusHandler(true);
       modalDataHandler({
         ...modalData,
         title: "Quick Reminder!",
-        msg: "You're home value must be greater than or equal to your down payment.",
+        msg:
+          "You're home value must be greater than or equal to your down payment.",
+        showInputValues: false,
       });
-      // props.toggleModal(showModalStatus, modalData);
 
-      // props.toggleModal(true, {title: 'hello'});
-    }else{
-      showModalStatusHandler(true);
-      modalDataHandler({
-        ...modalData,
-        title: "Quick Reminder",
-        msg: "You're home value must be greater than your down payment.",
-      });
+      return false;
     }
+
+    return true;
   };
 
   const handleSubmit = (e) => {
@@ -194,7 +193,21 @@ const Fields = (props) => {
     // log(`loanLength: ${getLoanLength()}`);
     // log("-----------------");
 
+
     checkAllInputValues();
+
+    if (checkAllInputValues()) {
+      showModalStatusHandler(true);
+      modalDataHandler({
+        ...modalData,
+        title: "Review",
+        msg: "Received",
+        width: '70vw',
+        height:'20vw',
+        showInputValues: true,
+        data: {homeValue, downPayment, interestRate, homeownersInsurance, propertyTax, hoa, loanLength}
+      });
+    }
 
     const principalLoanAmount = parseFloat(homeValue) - parseFloat(downPayment);
     const monthDurationOfLoan = parseFloat(getLoanLength()) * 12;
@@ -227,9 +240,7 @@ const Fields = (props) => {
     const monthlyPayment =
       principalAndInterest + hoa + propertyTax + homeownersInsurance;
 
-
-
-      // props.toggleModal(true, {modalInfo: {title: 'Estimated Mortgage', msg: 'Message here'}});
+    // props.toggleModal(true, {modalInfo: {title: 'Estimated Mortgage', msg: 'Message here'}});
     // log("monthly payment: ", monthlyPayment);
   };
 
@@ -241,15 +252,6 @@ const Fields = (props) => {
     if (showModalStatus && modalData.title) {
       props.toggleModal(showModalStatus, modalData);
     }
-
-    // if(showModalStatus){
-    //   props.toggleModal(true)
-    // }
-
-    // if(modalData.title){
-    //   props.toggleModal(true, modalData);
-
-    // }
   }, [modalData, showModalStatus]);
 
   return (
