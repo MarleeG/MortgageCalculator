@@ -42,7 +42,7 @@ const Base = () => {
         modalInfo={modalData}
         classes="center"
         toggleModal={toggleModal}
-        showInputValues={modalData. showInputValues}
+        showInputValues={modalData.showInputValues}
         inputData={modalData.data}
       />
     </div>

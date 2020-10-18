@@ -3,3 +3,4 @@
 React
 JavaScript 
 Animate.css
+Google Fonts

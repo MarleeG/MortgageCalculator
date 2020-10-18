@@ -1,5 +1,5 @@
 .input__container {
-  border: 2px dotted red;
+  /* border: 2px dotted red; */
   display: flex;
   flex-direction: column;
   width: 25%;

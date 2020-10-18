@@ -43,7 +43,7 @@ span.modal_exit-x:active {
 table.modal__table {
   border: 2px solid #dfdcd9;
   border-radius: 5px;
-  margin: auto;
+  margin: 15px auto;
   height: 50%;
   width: 100%;
 }
@@ -51,11 +51,11 @@ table.modal__table {
 table.modal__table th {
   font-size: 15px;
   text-align: left;
-  padding: 10px 5px;
+  padding: 0px 5px;
 
   border-bottom: 2px solid #dfdcd9;
+  background: #fff;
 
-  background: #f7f6f5;
 }
 
 table.modal__table > th:nth-child(1) {
@@ -63,7 +63,17 @@ table.modal__table > th:nth-child(1) {
 }
 
 table.modal__table td {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background: #f7f6f5;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: #fff;
+}
+
+
+
+/*  */
+.modal__btn-wrapper{
+    /* border: 2px dotted green; */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }

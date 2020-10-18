@@ -5,6 +5,7 @@ import Input from "../../UIElements/Input";
 import "./Fields.css";
 
 const log = console.log;
+// let loanLength = undefined;
 const Fields = (props) => {
   // input fields
   const [homeValue, updateHomeValue] = useState(100000);
@@ -13,7 +14,7 @@ const Fields = (props) => {
   const [homeownersInsurance, updateHomeownersInsurance] = useState(85);
   const [propertyTax, updatePropertyTax] = useState(110);
   const [hoa, updateHOA] = useState(150);
-  const [loanLength, updateLoanLength] = useState(30);
+  const [loanLength, updateLoanLength] = useState(undefined);
 
   const [currentKey, updateCurrentKey] = useState("");
   const [currentKeyCode, updateCurrentKeyCode] = useState(null);
@@ -102,6 +103,8 @@ const Fields = (props) => {
     let val = document.getElementById("loan-length").value;
     updateLoanLength(val);
 
+    // loanLength = val;
+
     return val;
   };
 
@@ -113,6 +116,7 @@ const Fields = (props) => {
       { name: "homeownersInsurance", val: homeownersInsurance },
       { name: "propertyTax", val: propertyTax },
       { name: "hoa", val: hoa },
+      { name: "loanLength", val: loanLength },
     ];
 
     // check if values are empty
@@ -145,6 +149,12 @@ const Fields = (props) => {
           case "hoa":
             updateHOA(0);
             break;
+          // case "loanLength":
+
+            // if (!loanLength) {
+            //   updateLoanLength(loanLength);
+            // }
+            // break;
 
           default:
             updateHomeValue(0);
@@ -161,7 +171,6 @@ const Fields = (props) => {
     const downPaymentValueInputted = inputValues[1].val;
 
     if (homeValueInputted < downPaymentValueInputted) {
-
       log("DOWN PAYMENT IS LARGER THAN HOME VALUE");
 
       showModalStatusHandler(true);
@@ -193,22 +202,35 @@ const Fields = (props) => {
     // log(`loanLength: ${getLoanLength()}`);
     // log("-----------------");
 
-
     checkAllInputValues();
 
-    if (checkAllInputValues()) {
+    if (checkAllInputValues() && loanLength) {
       showModalStatusHandler(true);
       modalDataHandler({
         ...modalData,
         title: "Review",
         msg: "Received",
-        width: '70vw',
-        height:'20vw',
+        width: "70vw",
+        height: "60vh",
         showInputValues: true,
-        data: {homeValue, downPayment, interestRate, homeownersInsurance, propertyTax, hoa, loanLength}
+        data: {
+          homeValue,
+          downPayment,
+          interestRate,
+          homeownersInsurance,
+          propertyTax,
+          hoa,
+          loanLength: getLoanLength(),
+        },
       });
     }
 
+    calculateMonthlyPayment();
+
+    
+  };
+
+  const calculateMonthlyPayment =() => {
     const principalLoanAmount = parseFloat(homeValue) - parseFloat(downPayment);
     const monthDurationOfLoan = parseFloat(getLoanLength()) * 12;
 
@@ -242,7 +264,7 @@ const Fields = (props) => {
 
     // props.toggleModal(true, {modalInfo: {title: 'Estimated Mortgage', msg: 'Message here'}});
     // log("monthly payment: ", monthlyPayment);
-  };
+  }
 
   useEffect(() => {
     // log("Modal Data:: ", modalData);
@@ -252,6 +274,7 @@ const Fields = (props) => {
     if (showModalStatus && modalData.title) {
       props.toggleModal(showModalStatus, modalData);
     }
+
   }, [modalData, showModalStatus]);
 
   return (
