@@ -27,12 +27,6 @@ const Button = (props) => {
   };
 
   const removeAnimation = () => {
-    // if (typeof animate === "boolean" || animate === undefined) {
-    //   if (animate) {
-    //     updateButtonClasses("button box-shadow animate__animated");
-    //   }
-    // }
-
     updateButtonClasses("button box-shadow animate__animated");
   };
 
