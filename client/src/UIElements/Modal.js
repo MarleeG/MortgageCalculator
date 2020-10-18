@@ -44,7 +44,7 @@ const ModalOverlay = (props) => {
           </span>
           {title && <h1 className="modal__header font-lobster">{title}</h1>}
 
-          {msg && <p>{msg}</p>}
+          {/* {msg && <p>{msg}</p>} */}
 
           <table className="modal__table">
             <tbody>
@@ -69,13 +69,23 @@ const ModalOverlay = (props) => {
             </tbody>
           </table>
 
-          {/* <Button
-          text="CLOSE"
-          type="text"
-          handleCloseModal={props.toggleModal}
-          animate={false}
-          classes="modal__btn"
-        /> */}
+          <div className="modal__btn-wrapper">
+            <Button
+              text="Calculate Mortgage"
+              type="text"
+              handleCloseModal={props.toggleModal}
+              animate={false}
+              classes="modal__btn modal__btn-calculate"
+            />
+
+            <Button
+              text="Edit"
+              type="text"
+              handleCloseModal={props.toggleModal}
+              animate={false}
+              classes="modal__btn modal__btn-calculate-close"
+            />
+          </div>
         </div>
       ) : (
         <div className={`modal__container ${classes}`}>
@@ -90,7 +100,7 @@ const ModalOverlay = (props) => {
           {msg && <p>{msg}</p>}
 
           <Button
-            text="CLOSE"
+            text="Close"
             type="text"
             handleCloseModal={props.toggleModal}
             animate={false}
